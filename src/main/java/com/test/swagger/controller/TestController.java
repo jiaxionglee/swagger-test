@@ -7,15 +7,16 @@ import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Created by jiaxiong on 2019-03-24 09:45
+ * @author jiaxiong
+ * @date 2019/3/24 09:51 上午
  */
 @RestController
 @RequestMapping("/api/test")
-@Api(value = "TestController", description = " Test api", tags = "Test控制器")
+@Api(value = "TestController", tags = "Test控制器")
 public class TestController {
 
     @ApiOperation(value = "测试POST请求", notes = "测试方法")
-    @RequestMapping(value = "/postAsBody", method = RequestMethod.POST)
+    @PostMapping(value = "/postAsBody")
     public TestResult testPostAsBody(@RequestBody TestRequest testRequest) {
         TestResult result = new TestResult();
         result.setParam1(testRequest.getParam1());
@@ -28,8 +29,8 @@ public class TestController {
             @ApiImplicitParam(name = "param1", value = "第一个参数", required = true, paramType = "form"),
             @ApiImplicitParam(name = "param2", value = "第二个参数", required = true, paramType = "form"),
     })
-    @RequestMapping(value = "/postAsForm", method = RequestMethod.POST)
-    public TestResult testPostAsForm(String param1,String param2) {
+    @PostMapping(value = "/postAsForm")
+    public TestResult testPostAsForm(String param1, String param2) {
         TestResult result = new TestResult();
         result.setParam1(param1);
         result.setParam2(param2);
@@ -37,7 +38,7 @@ public class TestController {
     }
 
     @ApiOperation(value = "测试GET请求", notes = "测试方法")
-    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    @GetMapping(value = "/get")
     public String testGet() {
         return "**测试**";
     }
